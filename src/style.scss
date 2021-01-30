@@ -1,0 +1,99 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 1200px;
+  display: flex;
+  justify-content: center;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.gallery {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.photo-card {
+  width: calc((100% - 2 * 30) / 3);
+
+  &:nth-child(3n) {
+    margin-right: 0px;
+  }
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gallery {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.stats-item {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.photo-card {
+  text-align: center;
+}
+
+.js-loadmore.is-hidden {
+  display: none;
+}
+
+.js-loadmore {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.photo-container {
+  margin-bottom: 20px;
+  width: calc((100% - 20px * 3) / 4);
+}
+
+.photo-container:not(:nth-child(4n)) {
+  margin-right: 20px;
+}
+.container {
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1400px;
+}
+
+.js-loadmore {
+  display: flex;
+  justify-content: center;
+}
