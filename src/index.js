@@ -1,46 +1,42 @@
 import './style.scss';
-import galleryMarkup from './templates/gallery-markup.hbs';
-import { fetchGallery, loadMorePictures } from './js/apiService.js';
+import galleryTemplate from './templates/gallery-markup.hbs';
+import { fetchPictures, loadMorePictures } from './js/apiService.js';
 
-const gallery = document.querySelector('.gallery');
-const submitBtn = document.querySelector('.js-submit');
+const gallery = document.querySelector('.js-gallery');
 const input = document.querySelector('.js-input');
+const submitBtn = document.querySelector('.js-submit');
 const loadMoreBtn = document.querySelector('.js-loadmore');
 
-submitBtn.addEventListener('click', createGallery);
+submitBtn.addEventListener('click', createMarkup);
 loadMoreBtn.addEventListener('click', loadMore);
 
-let inputText = '';
-
-function createMarkup(searchQuery) {
-  gallery.insertAdjacentHTML('beforeend', galleryMarkup(searchQuery));
-}
-
-function createGallery(event) {
+function createMarkup(event) {
   event.preventDefault();
-  inputText = input.value;
+
   gallery.innerHTML = '';
 
   if (!input.value.length) {
     gallery.innerHTML = '';
-    loadMoreBtn.classList.add('is-hidden');
     return;
   }
 
-  fetchGallery(inputText).then(data => {
-    if (data.hits.length) {
-      loadMoreBtn.classList.remove('is-hidden');
-      createMarkup(data.hits);
-    }
+  fetchPictures(input.value).then(data => {
+    loadMoreBtn.classList.remove('is-hidden');
+    onPictureSearch(data.hits);
+    return;
   });
 }
 
 function loadMore() {
-  loadMorePictures(inputText).then(data => {
-    createMarkup(data.hits);
+  loadMorePictures(input.value).then(data => {
+    onPictureSearch(data.hits);
     window.scrollTo({
       top: document.documentElement.offsetHeight - 100,
       behavior: 'smooth',
     });
   });
+}
+
+function onPictureSearch(searchQuery) {
+  gallery.insertAdjacentHTML('beforeend', galleryTemplate(searchQuery));
 }
